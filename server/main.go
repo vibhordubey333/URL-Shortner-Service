@@ -11,7 +11,7 @@ func main() {
 	r := gin.Default()
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"message": "Welcome to the URL Shortener API\n1. /create-short-url\n2. /:shortUrl",
+			"message": "Welcome to the URL Shortener API\n1. /create-short-url\n 2. /:shortUrl",
 		})
 	})
 

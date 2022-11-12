@@ -10,17 +10,6 @@ const (
 	charsLen         = len(chars)
 )
 
-type shortURLGenerator struct{}
-
-type URLKeyGenerator interface {
-	KeyGenerator() string
-}
-
-/*func NewURLKeyGenerator() URLKeyGenerator {
-	rand.Seed(time.Now().UnixNano())
-	return &shortURLGenerator{}
-}*/
-
 func KeyGenerator() string {
 	b := make([]byte, generatedKeySize)
 	for i := range b {
