@@ -2,8 +2,11 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
-	"vibhordubey333/URL-Shortner-Service/service"
+	"strings"
+	"vibhordubey333/URL-Shortner-Service/pkg/repository/redisdb"
+	"vibhordubey333/URL-Shortner-Service/pkg/service"
 )
 
 type UrlCreationRequest struct {
@@ -18,19 +21,23 @@ func CreateShortUrl(c *gin.Context) {
 		return
 	}
 
-	shortUrl := service.GenerateShortLink(creationRequest.LongUrl, creationRequest.UserId)
-	store.SaveUrlMapping(shortUrl, creationRequest.LongUrl, creationRequest.UserId)
+	shortUrl := service.KeyGenerator()
+	redisdb.SaveUrlMapping(shortUrl, creationRequest.LongUrl, creationRequest.UserId)
 
-	host := "http://localhost:9808/"
 	c.JSON(200, gin.H{
 		"message":   "short url created successfully",
-		"short_url": host + shortUrl,
+		"short_url": shortUrl,
 	})
 
 }
 
 func HandleShortUrlRedirect(c *gin.Context) {
 	shortUrl := c.Param("shortUrl")
-	initialUrl := store.RetrieveInitialUrl(shortUrl)
-	c.Redirect(302, initialUrl)
+	shortUrl = strings.Replace(shortUrl, ":", "", -1)
+	log.Println("Request Received By HandleShortUrlRedirect: ", shortUrl)
+
+	initialUrl := redisdb.RetrieveInitialUrl(shortUrl)
+	c.JSON(200, gin.H{
+		"LongURL": initialUrl,
+	})
 }

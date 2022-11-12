@@ -2,7 +2,6 @@ package service
 
 import (
 	"math/rand"
-	"time"
 )
 
 const (
@@ -17,12 +16,12 @@ type URLKeyGenerator interface {
 	KeyGenerator() string
 }
 
-func NewURLKeyGenerator() URLKeyGenerator {
+/*func NewURLKeyGenerator() URLKeyGenerator {
 	rand.Seed(time.Now().UnixNano())
 	return &shortURLGenerator{}
-}
+}*/
 
-func (kg *shortURLGenerator) KeyGenerator() string {
+func KeyGenerator() string {
 	b := make([]byte, generatedKeySize)
 	for i := range b {
 		b[i] = chars[rand.Intn(charsLen)]

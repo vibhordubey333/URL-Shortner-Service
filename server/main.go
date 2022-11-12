@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"vibhordubey333/URL-Shortner-Service/pkg/handler"
+	"vibhordubey333/URL-Shortner-Service/pkg/repository/redisdb"
 )
 
 func main() {
@@ -18,10 +19,11 @@ func main() {
 		handler.CreateShortUrl(c)
 	})
 
-	r.GET("/:shortUrl", func(c *gin.Context) {
+	r.GET("/shortUrl/:shortUrl", func(c *gin.Context) {
 		handler.HandleShortUrlRedirect(c)
 	})
-
+	// Note store initialization happens here
+	redisdb.InitializeStore()
 	errorResponse := r.Run(":7777")
 	if errorResponse != nil {
 		panic(fmt.Sprintf("Error while starting URL-Shortner-Server%v", errorResponse))
