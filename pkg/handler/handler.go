@@ -2,11 +2,11 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/vibhordubey333/URL-Shortner-Service/pkg/repository/redisdb"
+	"github.com/vibhordubey333/URL-Shortner-Service/pkg/service"
 	"log"
 	"net/http"
 	"strings"
-	"vibhordubey333/URL-Shortner-Service/pkg/repository/redisdb"
-	"vibhordubey333/URL-Shortner-Service/pkg/service"
 )
 
 type UrlCreationRequest struct {

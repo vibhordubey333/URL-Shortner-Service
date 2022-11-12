@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"vibhordubey333/URL-Shortner-Service/pkg/handler"
-	"vibhordubey333/URL-Shortner-Service/pkg/repository/redisdb"
+	"github.com/vibhordubey333/URL-Shortner-Service/pkg/handler"
+	"github.com/vibhordubey333/URL-Shortner-Service/pkg/repository/redisdb"
 )
 
 func main() {

@@ -1,0 +1,18 @@
+version: '3.0'
+services:
+  redisdb:
+    image: redis:6.0
+    restart: always
+    ports:
+      - "6379:6379"
+    container_name: redisdb-container
+    command: ["redis-server", "--bind", "redisdb", "--port", "6379"]
+
+  urlshortnerservice:
+    depends_on:
+      - redisdb
+    ports:
+      - "7777:7777"
+    restart: always
+    container_name: url-shortner-container
+    image: url-shortner-service
