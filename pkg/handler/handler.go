@@ -38,7 +38,7 @@ func CreateShortUrl(c *gin.Context) {
 
 }
 
-func HandleShortUrlRedirect(c *gin.Context) {
+func FetchOriginalURL(c *gin.Context) {
 	shortUrl := c.Param("shortUrl")
 	shortUrl = strings.Replace(shortUrl, ":", "", -1)
 	log.Println("Request Received By HandleShortUrlRedirect: ", shortUrl)

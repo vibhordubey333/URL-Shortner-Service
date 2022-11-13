@@ -15,12 +15,12 @@ func main() {
 		})
 	})
 
-	r.POST("/create-short-url", func(c *gin.Context) {
+	r.POST("/api/shorturls", func(c *gin.Context) {
 		handler.CreateShortUrl(c)
 	})
 
-	r.GET("/shortUrl/:shortUrl", func(c *gin.Context) {
-		handler.HandleShortUrlRedirect(c)
+	r.GET("/api/shorturls/:shortUrl", func(c *gin.Context) {
+		handler.FetchOriginalURL(c)
 	})
 	// Note store initialization happens here
 	redisdb.InitializeStore()

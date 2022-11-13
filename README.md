@@ -1,4 +1,5 @@
 ### URL-Shortner-Service
+URL shortner service using redis as database. Storing shortened URL's are stored in file as well `pkg/repository/filestorage/url-data.txt`
 
 #### Run
 
@@ -9,7 +10,7 @@
  
 0. Generate short URL.<br/>
    `Method:` POST <br/>
-   `URL:` http://localhost:7777/create-short-url\ <br/>
+   `URL:` http://localhost:7777/api/shorturls <br/>
    `Body:` ```{
    "long_url": "https://www.google.com",
    "user_id" : "e0dba740-fc4b-4977-872c-d360239e6b10"
@@ -17,7 +18,7 @@
 <br/>
 
 1. `Method:` GET <br/>
-   `URL:` http://localhost:7777/shortUrl/:bPlNFG <br/>
+   `URL:` http://localhost:7777/api/shorturls/:bPlNFG <br/>
 
 <details>
 <summary>References </summary>
