@@ -16,3 +16,5 @@ services:
     restart: always
     container_name: url-shortner-container
     image: url-shortner-service
+    volumes:
+      - ../pkg/repository/filestorage:/pkg/repository/filestorage #host directory:container directory

@@ -1,7 +1,9 @@
 package handler
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
+	fs "github.com/vibhordubey333/URL-Shortner-Service/pkg/repository/filestorage"
 	"github.com/vibhordubey333/URL-Shortner-Service/pkg/repository/redisdb"
 	"github.com/vibhordubey333/URL-Shortner-Service/pkg/service"
 	"log"
@@ -15,6 +17,7 @@ type UrlCreationRequest struct {
 }
 
 func CreateShortUrl(c *gin.Context) {
+	fmt.Println("Request received by CreateShortUrl")
 	var creationRequest UrlCreationRequest
 	if err := c.ShouldBindJSON(&creationRequest); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -22,7 +25,11 @@ func CreateShortUrl(c *gin.Context) {
 	}
 
 	shortUrl := service.KeyGenerator()
+	//Storing in redis.
+
 	redisdb.SaveUrlMapping(shortUrl, creationRequest.LongUrl, creationRequest.UserId)
+	//Storing in file.
+	fs.StoreInFile(shortUrl, creationRequest.LongUrl)
 
 	c.JSON(200, gin.H{
 		"message":   "short url created successfully",

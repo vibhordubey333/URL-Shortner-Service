@@ -19,7 +19,7 @@
    `URL:` http://localhost:7777/shortUrl/:bPlNFG <br/>
 
 <details>
-<summary>References <summary>
+<summary>References </summary>
     A. https://github.com/bxcodec/go-clean-arch <br/>
     B. https://www.eddywm.com/
 </details>
