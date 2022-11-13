@@ -15,6 +15,7 @@
    "user_id" : "e0dba740-fc4b-4977-872c-d360239e6b10"
    }``` <br/>
 <br/>
+
 1. `Method:` GET <br/>
    `URL:` http://localhost:7777/shortUrl/:bPlNFG <br/>
 
