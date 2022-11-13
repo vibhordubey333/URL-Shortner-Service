@@ -1,5 +1,5 @@
 ### URL-Shortner-Service
-URL shortner service using redis as database. Storing shortened URL's are stored in file as well `pkg/repository/filestorage/url-data.txt`
+URL shortner service using redis as database. Storing shortened URL's are stored in the file `pkg/repository/filestorage/url-data.txt`
 
 #### Run
 

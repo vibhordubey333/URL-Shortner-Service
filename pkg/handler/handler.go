@@ -6,7 +6,6 @@ import (
 	fs "github.com/vibhordubey333/URL-Shortner-Service/pkg/repository/filestorage"
 	"github.com/vibhordubey333/URL-Shortner-Service/pkg/repository/redisdb"
 	"github.com/vibhordubey333/URL-Shortner-Service/pkg/service"
-	"log"
 	"net/http"
 	"strings"
 )
@@ -41,10 +40,22 @@ func CreateShortUrl(c *gin.Context) {
 func FetchOriginalURL(c *gin.Context) {
 	shortUrl := c.Param("shortUrl")
 	shortUrl = strings.Replace(shortUrl, ":", "", -1)
-	log.Println("Request Received By HandleShortUrlRedirect: ", shortUrl)
 
-	initialUrl := redisdb.RetrieveInitialUrl(shortUrl)
-	c.JSON(200, gin.H{
-		"LongURL": initialUrl,
-	})
+	initialUrl, errorResponse := redisdb.RetrieveInitialUrl(shortUrl)
+	originalUrl, errorResponseFile := fs.FetchUrlFromFile(shortUrl)
+
+	if errorResponseFile != nil && originalUrl == "" {
+		fmt.Println("ShortURL not found in file")
+	}
+	fmt.Println("originalUrl", originalUrl)
+
+	if errorResponse != nil {
+		c.JSON(400, gin.H{
+			"Message": "URL doesn't exists",
+		})
+	} else {
+		c.JSON(200, gin.H{
+			"LongURL": initialUrl,
+		})
+	}
 }

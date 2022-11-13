@@ -28,12 +28,13 @@ func SaveUrlMapping(shortUrl string, originalUrl string, userId string) {
 	fmt.Printf("Saved shortUrl: %s - originalUrl: %s\n", shortUrl, originalUrl)
 }
 
-func RetrieveInitialUrl(shortUrl string) string {
+func RetrieveInitialUrl(shortUrl string) (string, error) {
 	log.Println("Request received by RetrieveInitialUrl: ", shortUrl)
+
 	result, err := storeService.redisClient.Get(ctx, shortUrl).Result()
 	if err != nil {
-		panic(fmt.Sprintf("Failed RetrieveInitialUrl url | Error: %v - shortUrl: %s\n", err, shortUrl))
+		fmt.Println("Failed RetrieveInitialUrl url | Error: %v - shortUrl: %s\n", err, shortUrl)
 	}
-	log.Println("Response from RetreiveInitialUrl:", result)
-	return result
+	log.Println("Response from RetrieveInitialUrl:", result)
+	return result, err
 }
