@@ -2,9 +2,7 @@
 URL shortner service using redis as database. Storing shortened URL's are stored in the file `pkg/repository/filestorage/url-data.txt`
 
 #### Run
-
-0. Build docker image: `docker build --rm -t url-shortner-service -f build/Dockerfile .`
-1. `docker-compose -f ./build/docker-compose.yml up -d`
+`docker-compose -f ./build/docker-compose.yml up -d`
 
 #### APIs
  

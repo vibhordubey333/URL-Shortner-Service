@@ -9,6 +9,8 @@ services:
     command: ["redis-server", "--bind", "redisdb", "--port", "6379"]
 
   urlshortnerservice:
+    build:
+      context: .
     depends_on:
       - redisdb
     ports:
