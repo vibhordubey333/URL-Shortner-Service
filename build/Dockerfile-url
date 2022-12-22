@@ -1,0 +1,14 @@
+FROM golang:1.19-alpine AS builder
+RUN mkdir /app
+WORKDIR /app
+
+COPY . .
+RUN chmod 0700 .
+RUN export GOSUMDB=off
+RUN export GO111MODULE=on
+RUN export GOPRIVATE=github.hpe.com/*
+RUN go mod tidy
+RUN GO_ENABLED=0 GOOS=linux GOARCH=amd64 go build ./server/*.go
+RUN chmod +x main
+CMD ["./main"]
+

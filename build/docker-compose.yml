@@ -12,7 +12,8 @@ services:
 
   urlshortnerservice:
     build:
-      context: .
+      context: ../
+      dockerfile: ./build/Dockerfile-url
     depends_on:
       - redisdb
     ports:
