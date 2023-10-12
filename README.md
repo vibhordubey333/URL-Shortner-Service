@@ -2,8 +2,8 @@
 URL shortner service using redis as database. Storing shortened URL's are stored in the file `pkg/repository/filestorage/url-data.txt`
 
 #### Run
-`docker-compose -f ./build/docker-compose.yml up -d`
-
+1. make build
+2. make test
 #### APIs
  
 0. Generate short URL.<br/>
