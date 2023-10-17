@@ -10,12 +10,21 @@ import (
 	"strings"
 )
 
+// mockgen -source handler.go -destination mocks/mocks.go
+type URLShortnerHandlerInterface interface {
+	CreateShortUrl(c *gin.Context)
+	FetchOriginalURL(c *gin.Context)
+}
+
+type URLShortnerProcessor struct{}
+
 type UrlCreationRequest struct {
 	LongUrl string `json:"long_url" binding:"required"`
 	UserId  string `json:"user_id" binding:"required"`
 }
 
-func CreateShortUrl(c *gin.Context) {
+// `go generate:`
+func (u *URLShortnerProcessor) CreateShortUrl(c *gin.Context) {
 	fmt.Println("Request received by CreateShortUrl")
 	var creationRequest UrlCreationRequest
 	if err := c.ShouldBindJSON(&creationRequest); err != nil {
@@ -37,7 +46,7 @@ func CreateShortUrl(c *gin.Context) {
 
 }
 
-func FetchOriginalURL(c *gin.Context) {
+func (u *URLShortnerProcessor) FetchOriginalURL(c *gin.Context) {
 	shortUrl := c.Param("shortUrl")
 	shortUrl = strings.Replace(shortUrl, ":", "", -1)
 
