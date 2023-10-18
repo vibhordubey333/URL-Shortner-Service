@@ -25,6 +25,9 @@ type UrlCreationRequest struct {
 
 // `go generate:`
 func (u *URLShortnerProcessor) CreateShortUrl(c *gin.Context) {
+	if c == nil {
+		return
+	}
 	fmt.Println("Request received by CreateShortUrl")
 	var creationRequest UrlCreationRequest
 	if err := c.ShouldBindJSON(&creationRequest); err != nil {

@@ -60,6 +60,7 @@ func TestURLShortnerProcessor_CreateShortUrl(t *testing.T) {
 
 	//mockFetcher := mock_handler.NewMockURLShortnerHandlerInterface(mockCtrl)
 	mockContext, err := gin.CreateTestContext(httptest.NewRecorder())
+
 	if err != nil {
 		//log.Fatal("Error while initializing mockContext: ", err)
 	}
@@ -75,7 +76,10 @@ func TestURLShortnerProcessor_CreateShortUrl(t *testing.T) {
 			name: "CreateShortURL_Success",
 			args: args{mockContext},
 		},
-		{},
+		{
+			name: "CreateShortURL_Failure",
+			args: args{nil},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
